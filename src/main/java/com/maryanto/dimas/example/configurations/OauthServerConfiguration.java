@@ -35,6 +35,8 @@ public class OauthServerConfiguration extends AuthorizationServerConfigurerAdapt
 
     @Autowired
     private TokenStore tokenStore;
+    @Autowired
+    private TokenEnhancer tokenEnhancer;
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -86,16 +88,11 @@ public class OauthServerConfiguration extends AuthorizationServerConfigurerAdapt
                 .autoApprove(true);
     }
 
-    @Bean
-    public TokenEnhancer tokenEnhancer() {
-        return new JwtTokenConfiguration();
-    }
-
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(
-                Arrays.asList(tokenEnhancer(), accessTokenConverter()));
+                Arrays.asList(tokenEnhancer, accessTokenConverter()));
         endpoints
                 .tokenStore(tokenStore)
                 .tokenEnhancer(tokenEnhancerChain)
