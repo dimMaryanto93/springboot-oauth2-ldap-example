@@ -16,8 +16,6 @@ public class JwtTokenConfiguration implements TokenEnhancer {
             OAuth2Authentication authentication) {
 
         Map<String, Object> additionalInfo = new HashMap<>();
-        String userid = authentication.getName();
-//        additionalInfo.put("organization", userid + "{" + UUID.randomUUID().toString() + "}");
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
         return accessToken;
     }
