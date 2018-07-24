@@ -1,0 +1,41 @@
+dn: ou=groups,dc=mandiri,dc=dis
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=mandiri,dc=dis
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=user,ou=people,dc=mandiri,dc=dis
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Dimas Maryanto
+sn: Dimas
+uid: user
+userPassword: password
+
+dn: cn=USER,ou=groups,dc=mandiri,dc=dis
+objectclass: top
+objectclass: groupOfNames
+cn: USER
+member: uid=user,ou=people,dc=mandiri,dc=dis
+
+dn: uid=admin,ou=people,dc=mandiri,dc=dis
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Hari Sapto Adi
+sn: Sapto
+uid: admin
+userPassword: password
+
+dn: cn=ADMIN,ou=groups,dc=mandiri,dc=dis
+objectclass: top
+objectclass: groupOfNames
+cn: ADMIN
+member: uid=admin,ou=people,dc=mandiri,dc=dis

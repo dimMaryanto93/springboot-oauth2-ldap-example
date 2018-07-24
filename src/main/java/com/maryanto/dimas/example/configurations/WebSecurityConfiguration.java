@@ -46,9 +46,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        super.configure(auth);
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER").and()
-                .withUser("admin").password("password").roles("ADMIN", "USER");
+        auth.ldapAuthentication()
+                .userSearchBase("ou=people")
+                .userSearchFilter("(uid={0})")
+                .groupSearchBase("ou=groups")
+                .groupSearchFilter("member={0}")
+                .contextSource()
+                .root("dc=mandiri,dc=dis")
+                .ldif("classpath:/data/users.ldif");
     }
 
     @Override
